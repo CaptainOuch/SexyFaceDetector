@@ -10,7 +10,7 @@ import pyvips
 import time
 import io
 
-facetracker = load_model('C:/Users/Admin/Face Detection/facetracker_02.h5')
+facetracker = load_model('C:/Users/Admin/Face Detection/facetracker.h5')
 sextracker = load_model('C:/Users/Admin/Face Detection/sextracker.h5')
 
 
@@ -134,6 +134,8 @@ def handle_media(message):
 
             os.remove('output.jpg')
             
+            os.remove('photo.jpg')
+            
         else:
             bot.send_message(message.chat.id, 'Бот не видит здесь лица.')
         
@@ -141,7 +143,7 @@ def handle_media(message):
 
 
 
-        os.remove('photo.jpg')
+        
 
 
 bot.polling()
