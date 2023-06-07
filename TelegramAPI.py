@@ -16,7 +16,7 @@ sextracker = load_model('C:/Users/Admin/Face Detection/sextracker.h5')
 
 print('Starting up bot...')
 
-TOKEN = '6240085199:AAFgxh4heqGjq5XCEBvj2obvX2l9eulNIcM'
+TOKEN = 'YOUR TOKEN'
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
