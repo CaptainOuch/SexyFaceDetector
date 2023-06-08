@@ -14,7 +14,7 @@ Ugly:
 </p>
 
 # Данные
-## Sexyness clasification
+## Sexyness classifier
 
 Данные для классификации сексуальности были загружены с помощью плагина для браузера 
 - [Download All Images](https://chrome.google.com/webstore/detail/download-all-images/ifipmflagepipjokmbdecpmjbibjnakm) (Загружает изображения с любой страницы)
@@ -63,36 +63,88 @@ augmentor = alb.Compose([alb.RandomCrop(width=450, height=450),
                        bbox_params=alb.BboxParams(format='albumentations', 
                                                   label_fields=['class_labels']))
 ```
-## Training on FER2013
+# Обучение моделей
+## Sexyness classifier
+В обучении классификатора использовался несложный пайплайн сверточной нейронной сети
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1IEQ091jBeJrOKHJe4wNhodH-bUGbLHSE?usp=sharing)
-
-- To train network, you need to specify model name and other hyperparameters in config file (located at configs/\*) then ensure it is loaded in main file, then run training procedure by simply run main file, for example:
-
-```Shell
-python main_fer.py  # Example for fer2013_config.json file
+```python
+model.summary()
 ```
 
-- The best checkpoints will chosen at term of best validation accuracy, located at `saved/checkpoints`
-- The TensorBoard training logs are located at `saved/logs`, to open it, use `tensorboard --logdir saved/logs/`
+    Model: "sequential_14"
+    _________________________________________________________________
+     Layer (type)                Output Shape              Param #   
+    =================================================================
+     conv2d_23 (Conv2D)          (None, 118, 118, 16)      448       
+                                                                     
+     max_pooling2d_22 (MaxPoolin  (None, 59, 59, 16)       0         
+     g2D)                                                            
+                                                                     
+     conv2d_24 (Conv2D)          (None, 57, 57, 32)        4640      
+                                                                     
+     max_pooling2d_23 (MaxPoolin  (None, 28, 28, 32)       0         
+     g2D)                                                            
+                                                                     
+     conv2d_25 (Conv2D)          (None, 26, 26, 64)        18496     
+                                                                     
+     max_pooling2d_24 (MaxPoolin  (None, 13, 13, 64)       0         
+     g2D)                                                            
+                                                                     
+     flatten_7 (Flatten)         (None, 10816)             0         
+                                                                     
+     dense_21 (Dense)            (None, 512)               5538304   
+                                                                     
+     dense_22 (Dense)            (None, 1)                 513       
+                                                                     
+    =================================================================
+    Total params: 5,562,401
+    Trainable params: 5,562,401
+    Non-trainable params: 0
+    _________________________________________________________________
 
-<p align="center">
-<img width=900 src= "https://user-images.githubusercontent.com/24642166/75408653-fddf2b00-5948-11ea-981f-3d95478d5708.png"/>
-</p>
 
-- By default, it will train `alexnet` model, you can switch to another model by edit `configs/fer2013\_config.json` file (to `resnet18` or `cbam\_resnet50` or my network `resmasking\_dropout1`.
+## Face Detection
+В пайплайне модели использовалась предобученная сверточная нейронная сеть VGG16 без конечного слоя с нейронами
 
-<p id="train_imagenet"></p>
-
-## Training on Imagenet dataset
-
-To perform training resnet34 on 4 V100 GPUs on a single machine:
-
-```Shell
-python ./main_imagenet.py -a resnet34 --dist-url 'tcp://127.0.0.1:12345' --dist-backend 'nccl' --multiprocessing-distributed --world-size 1 --rank 0
+```python
+vgg = VGG16(include_top=False)
 ```
 
-<p id="eval"></p>
+(https://neurohive.io/wp-content/uploads/2018/11/vgg16-neural-network-1.jpg)
+
+```python
+facetracker.summary()
+```
+
+    Model: "model"
+    __________________________________________________________________________________________________
+     Layer (type)                   Output Shape         Param #     Connected to                     
+    ==================================================================================================
+     input_2 (InputLayer)           [(None, 120, 120, 3  0           []                               
+                                    )]                                                                
+                                                                                                      
+     vgg16 (Functional)             (None, None, None,   14714688    ['input_2[0][0]']                
+                                    512)                                                              
+                                                                                                      
+     global_max_pooling2d (GlobalMa  (None, 512)         0           ['vgg16[0][0]']                  
+     xPooling2D)                                                                                      
+                                                                                                      
+     global_max_pooling2d_1 (Global  (None, 512)         0           ['vgg16[0][0]']                  
+     MaxPooling2D)                                                                                    
+                                                                                                      
+     dense (Dense)                  (None, 2048)         1050624     ['global_max_pooling2d[0][0]']   
+                                                                                                      
+     dense_2 (Dense)                (None, 2048)         1050624     ['global_max_pooling2d_1[0][0]'] 
+                                                                                                      
+     dense_1 (Dense)                (None, 1)            2049        ['dense[0][0]']                  
+                                                                                                      
+     dense_3 (Dense)                (None, 4)            8196        ['dense_2[0][0]']                
+                                                                                                      
+    ==================================================================================================
+    Total params: 16,826,181
+    Trainable params: 16,826,181
+    Non-trainable params: 0
+    __________________________________________________________________________________________________
 
 ## Evaluation
 
