@@ -41,7 +41,8 @@ cv2.destroyAllWindows()
 ## Sexyness clasification
 
 Данные для классификации сексуальности были загружены с помощью плагина для браузера 
-- [Download All Images](https://chrome.google.com/webstore/detail/download-all-images/ifipmflagepipjokmbdecpmjbibjnakm) (ensure it can be loaded by torchvision.datasets.Imagenet)
+- [Download All Images](https://chrome.google.com/webstore/detail/download-all-images/ifipmflagepipjokmbdecpmjbibjnakm) (Загружает изображения с любой страницы)
+- В данном случае изображения были загружены по запросам в "google картинки" sexy face, ugly face
 
 <p id="train_fer"></p>
 
