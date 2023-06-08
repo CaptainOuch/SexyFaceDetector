@@ -14,6 +14,14 @@ Ugly:
 </p>
 
 # Данные
+## Sexyness clasification
+
+Данные для классификации сексуальности были загружены с помощью плагина для браузера 
+- [Download All Images](https://chrome.google.com/webstore/detail/download-all-images/ifipmflagepipjokmbdecpmjbibjnakm) (Загружает изображения с любой страницы)
+- В данном случае изображения были загружены по запросам в "google картинки" sexy face, ugly face
+
+<p id="train_fer"></p>
+
 ## Face Detection
 - Данные для определения координат лица были сняты с камеры с помощью функции .VideoCapture библиотеки opencv
 ```python
@@ -38,14 +46,23 @@ cv2.destroyAllWindows()
 !labelme
 ```
 
-## Sexyness clasification
+Далее данные были размножены с помощью библиотеки [Albumentations](https://albumentations.ai/)
 
-Данные для классификации сексуальности были загружены с помощью плагина для браузера 
-- [Download All Images](https://chrome.google.com/webstore/detail/download-all-images/ifipmflagepipjokmbdecpmjbibjnakm) (Загружает изображения с любой страницы)
-- В данном случае изображения были загружены по запросам в "google картинки" sexy face, ugly face
+```python
+import albumentations as alb
+```
 
-<p id="train_fer"></p>
 
+```python
+augmentor = alb.Compose([alb.RandomCrop(width=450, height=450), 
+                         alb.HorizontalFlip(p=0.5), 
+                         alb.RandomBrightnessContrast(p=0.2),
+                         alb.RandomGamma(p=0.2), 
+                         alb.RGBShift(p=0.2), 
+                         alb.VerticalFlip(p=0.5)], 
+                       bbox_params=alb.BboxParams(format='albumentations', 
+                                                  label_fields=['class_labels']))
+```
 ## Training on FER2013
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1IEQ091jBeJrOKHJe4wNhodH-bUGbLHSE?usp=sharing)
