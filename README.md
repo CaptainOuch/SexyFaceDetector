@@ -103,14 +103,23 @@ model.summary()
     _________________________________________________________________
 
 
+<p align="center">
+<img width=500 src= "https://user-images.githubusercontent.com/38643187/244346074-8f51af47-1a58-4d6f-843a-da0630820d77.png"/>
+</p>
+<p align="center">
+<img width=500 src= "https://user-images.githubusercontent.com/38643187/244346192-cf8fb7f6-de7f-47c9-80f5-1266f234a1e0.png"/>
+</p>
+
+
 ## Face Detection
 В пайплайне модели использовалась предобученная сверточная нейронная сеть VGG16 без конечного слоя с нейронами
 
 ```python
 vgg = VGG16(include_top=False)
 ```
-
-(https://neurohive.io/wp-content/uploads/2018/11/vgg16-neural-network-1.jpg)
+<p align="center">
+<img width=500 src= "https://neurohive.io/wp-content/uploads/2018/11/vgg16-neural-network-1.jpg"/>
+</p>
 
 ```python
 facetracker.summary()
