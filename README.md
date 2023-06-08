@@ -13,9 +13,8 @@ Ugly:
 <img width=500 src= "https://user-images.githubusercontent.com/38643187/244309258-c7aac061-dfcb-4e0e-ad87-da8de4f6f491.png"/>
 </p>
 
-## Данные
-
-Данные
+# Данные
+## Face Detection
 - Данные для определения координат лица были сняты с камеры с помощью функции .VideoCapture библиотеки opencv
 ```python
 cap = cv2.VideoCapture(1)
@@ -38,7 +37,11 @@ cv2.destroyAllWindows()
 ```python
 !labelme
 ```
-- [ImageNet 1K Dataset](http://image-net.org/download-images) (ensure it can be loaded by torchvision.datasets.Imagenet)
+
+## Sexyness clasification
+
+Данные для классификации сексуальности были загружены с помощью плагина для браузера 
+- [Download All Images](https://chrome.google.com/webstore/detail/download-all-images/ifipmflagepipjokmbdecpmjbibjnakm) (ensure it can be loaded by torchvision.datasets.Imagenet)
 
 <p id="train_fer"></p>
 
