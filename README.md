@@ -17,21 +17,21 @@ Ugly:
 
 Данные
 - Данные для определения координат лица были сняты с камеры с помощью
-   "source": [
-    "cap = cv2.VideoCapture(1)\n",
-    "for imgnum in range(number_images):\n",
-    "    print('Collecting image {}'.format(imgnum))\n",
-    "    ret, frame = cap.read()\n",
-    "    imgname = os.path.join(IMAGES_PATH,f'{str(uuid.uuid1())}.jpg')\n",
-    "    cv2.imwrite(imgname, frame)\n",
-    "    cv2.imshow('frame', frame)\n",
-    "    time.sleep(0.5)\n",
-    "\n",
-    "    if cv2.waitKey(1) & 0xFF == ord('q'):\n",
-    "        break\n",
-    "cap.release()\n",
-    "cv2.destroyAllWindows()"
-   ]
+```python
+cap = cv2.VideoCapture(1)
+for imgnum in range(number_images):
+    print('Collecting image {}'.format(imgnum))
+    ret, frame = cap.read()
+    imgname = os.path.join(IMAGES_PATH,f'{str(uuid.uuid1())}.jpg')
+    cv2.imwrite(imgname, frame)
+    cv2.imshow('frame', frame)
+    time.sleep(0.5)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+cap.release()
+cv2.destroyAllWindows()
+```
 - [ImageNet 1K Dataset](http://image-net.org/download-images) (ensure it can be loaded by torchvision.datasets.Imagenet)
 
 <p id="train_fer"></p>
