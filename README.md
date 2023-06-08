@@ -1,95 +1,21 @@
-# Sexy Face Detection using convolutional neural networks 
+# Определние лица и его сексуальности с помощью сверточных нейронных сетей
 
 # Результат:
+Есть 2 категории
 
-
+Sexy:
 <p align="center">
 <img width=500 src= "https://user-images.githubusercontent.com/38643187/244308863-25d92455-a100-4eec-b5fd-1a217433810a.png"/>
 </p>
 
+Ugly:
 <p align="center">
 <img width=500 src= "https://user-images.githubusercontent.com/38643187/244309258-c7aac061-dfcb-4e0e-ad87-da8de4f6f491.png"/>
 </p>
 
-### Table of Contents
+## Данные
 
-- <a href='#recent_update'>Recent Update</a>
-- <a href='#benchmarking_fer2013'>Benchmarking on FER2013</a>
-- <a href='#benchmarking_imagenet'>Benchmarking on ImageNet</a>
-- <a href='#install'>Installation</a>
-- <a href='#datasets'>Download datasets</a>
-- <a href='#train_fer'>Training on FER2013</a>
-- <a href='#train_imagenet'>Training on ImageNet</a>
-- <a href='#eval'>Evaluation results</a>
-- <a href='#docs'>Download dissertation and slide</a>
-
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-
-<p id="recent_update"></p>
-
-## Recent Update
-
-- [07/03/2023] Re-structure, update Readme
-- [05/05/2021] Release ver 2, add colab
-- [27/02/2021] Add paper
-- [14/01/2021] Packaging Project and publish `rmn` on Pypi
-- [27/02/2020] Update Tensorboard visualizations and Overleaf source
-- [22/02/2020] Test-time augmentation implementation.
-- [21/02/2020] Imagenet training code and trained weights released.
-- [21/02/2020] Imagenet evaluation results released.
-- [10/01/2020] Checking demo stuff and training procedure works on another machine
-- [09/01/2020] First time upload
-
-<p id="benchmarking_fer2013"></p>
-
-## Benchmarking on FER2013
-
-We benchmark our code thoroughly on two datasets: FER2013 and VEMO. Below are the results and trained weights:
-
-| Model                                                                                                     | Accuracy |
-| --------------------------------------------------------------------------------------------------------- | -------- |
-| [VGG19](https://drive.google.com/file/d/196qnnULQpFK5O5Md_YfvsUC2OQRd5LrQ/view?usp=sharing)               | 70.80    |
-| [EfficientNet_b2b](https://drive.google.com/file/d/1ZqvGcqYZXXbMKFwSaoHlo6LaKVYptXxx/view?usp=sharing)    | 70.80    |
-| [Googlenet](https://drive.google.com/file/d/1FNiNS7qqkd4dPQX9APiFsEyylb-ZHN8f/view?usp=sharing)           | 71.97    |
-| [Resnet34](https://drive.google.com/file/d/1GFSWnjA2tvsVel3kz0EyYW_el7Nyu8Gc/view?usp=sharing)            | 72.42    |
-| [Inception_v3](https://drive.google.com/file/d/10LpGJEmSTikidqaiv32rcJYQc3Cx_n6-/view?usp=sharing)        | 72.72    |
-| [Bam_Resnet50](https://drive.google.com/file/d/1RlVX2eiaQrUUmpng1PCyhK_hJdfJRcoU/view?usp=sharing)        | 73.14    |
-| [Densenet121](https://drive.google.com/file/d/1VWZ96Ar_n_OQD4Rk5ThZbixApMQ5eeYW/view?usp=sharing)         | 73.16    |
-| [Resnet152](https://drive.google.com/file/d/1A-kUqrP9u3ZCXVBtE6AdUN5afPwQjTHl/view?usp=sharing)           | 73.22    |
-| [Cbam_Resnet50](https://drive.google.com/file/d/1_u_B2NcxqCMPdWmPLMYKVzAenwBlwoFi/view?usp=sharing)       | 73.39    |
-| [ResMaskingNet](https://drive.google.com/file/d/1dmOycqZACsLh0eyDSR2ssn4g9xh36zMp/view?usp=sharing)       | 74.14    |
-| [ResMaskingNet + 6](https://drive.google.com/drive/folders/1Nt7y1T99HpmF93peYxMg-i6BUqdzDBve?usp=sharing) | 76.82    |
-
-Results in VEMO dataset could be found in my thesis or slide (attached below)
-
-<p id="benchmarking_imagenet"></p>
-
-## Benchmarking on ImageNet
-
-We also benchmark our model on ImageNet dataset.
-
-| Model                                                                                        | Top-1 Accuracy | Top-5 Accuracy |
-| -------------------------------------------------------------------------------------------- | -------------- | -------------- |
-| [Resnet34](https://drive.google.com/open?id=16lErBAk7K3WswKP0wyE9S0dNrr7AF6wd)               | 72.59          | 90.92          |
-| [CBAM Resnet34](https://drive.google.com/open?id=16lErBAk7K3WswKP0wyE9S0dNrr7AF6wd)          | 73.77          | 91.72          |
-| [ResidualMaskingNetwork](https://drive.google.com/open?id=1myjp4_XL8mNJlAbz0TFjYKUc7B0N64eb) | 74.16          | 91.91          |
-
-<p id="install"></p>
-
-## Installation
-
-- Install [PyTorch](http://pytorch.org/) by selecting your environment on the website and running the appropriate command.
-- Clone this repository and install package [prerequisites](#prerequisites) below.
-- Then download the dataset by following the [instructions](#datasets) below.
-
-
-<p id="datasets"></p>
-
-## Datasets
-
+Данные
 - [FER2013 Dataset](https://drive.google.com/drive/folders/1Nt7y1T99HpmF93peYxMg-i6BUqdzDBve?usp=sharing) (locate it in `saved/data/fer2013` like `saved/data/fer2013/train.csv`)
 - [ImageNet 1K Dataset](http://image-net.org/download-images) (ensure it can be loaded by torchvision.datasets.Imagenet)
 
