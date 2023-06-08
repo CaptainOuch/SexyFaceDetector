@@ -16,7 +16,7 @@ Ugly:
 ## Данные
 
 Данные
-- Данные для определения координат лица были сняты с камеры с помощью
+- Данные для определения координат лица были сняты с камеры с помощью функции .VideoCapture библиотеки opencv
 ```python
 cap = cv2.VideoCapture(1)
 for imgnum in range(number_images):
@@ -31,6 +31,12 @@ for imgnum in range(number_images):
         break
 cap.release()
 cv2.destroyAllWindows()
+```
+
+А затем размечены с помощью labelme
+
+```python
+!labelme
 ```
 - [ImageNet 1K Dataset](http://image-net.org/download-images) (ensure it can be loaded by torchvision.datasets.Imagenet)
 
