@@ -154,59 +154,26 @@ facetracker.summary()
     Trainable params: 16,826,181
     Non-trainable params: 0
     __________________________________________________________________________________________________
-
-## Evaluation
-
-For student, who takes care of font family of confusion matrix and would like to write things in LaTeX, below is an example for generating a striking confusion matrix.
-
-(Read [this article](https://matplotlib.org/3.1.1/tutorials/text/usetex.html) for more information, there will be some bugs if you blindly run the code without reading).
-
-```Shell
-python cm_cbam.py
-```
-
+    
+    
 <p align="center">
-<img width=600 src= "https://user-images.githubusercontent.com/24642166/104806916-81c62e00-580d-11eb-8dcd-c5759e5d48ae.png"/>
+<img width=500 src= "https://user-images.githubusercontent.com/38643187/244348623-0be6b5a6-51e7-4b75-a562-f0fb49ed9b16.png"/>
 </p>
 
-## Ensemble method
+## Имплементация в telegram
 
-I used no-weighted sum avarage ensemble method to fusing 7 different models together, to reproduce results, you need to do some steps:
-
-1. Download all needed trained weights and located on `./saved/checkpoints/` directory. Link to download can be found on Benchmarking section.
-2. Edit file `gen_results` and run it to generate result offline for **each** model.
-3. Run `gen_ensemble.py` file to generate accuracy for example methods.
-
-<p id="docs"></p>
-
-## Dissertation and Slide
-
-- [Dissertation PDF (in Vietnamese)](https://drive.google.com/drive/folders/1Nt7y1T99HpmF93peYxMg-i6BUqdzDBve?usp=sharing)
-- [Dissertation Overleaf Source](https://www.overleaf.com/read/qdyhnzjmbscd)
-- [Presentation slide PDF (in English) with full appendix](https://drive.google.com/drive/folders/1Nt7y1T99HpmF93peYxMg-i6BUqdzDBve?usp=sharing)
-- [Presentation slide Overleaf Source](https://www.overleaf.com/read/vxdhjvhvgwdn)
-- [Paper](docs/paper.pdf)
-
-<p id="author"></p>
-
-## Authors
-
-- [**Luan Pham**](https://github.com/phamquiluan)
-- [**Tuan Anh Tran**](https://github.com/phamquiluan)
+Основную сложность вызвала проблема с горизонтальными и вертикальными изображениями - т.к. нейронная сеть принимает только квадратные изображения, информация сильно искажается.
+У каждой картинки с неравными сторонами добавляются белые полосы к меньшей стороне.
 
 
-<p id="references"></p>
+```python
+if height < width:
+    diff = width - height
+    pad = diff // 2
+    padded_img = np.pad(img, ((pad, pad), (0, 0), (0, 0)), mode='constant', constant_values=128)
+else:
+    diff = height - width
+    pad = diff // 2
+    padded_img = np.pad(img, ((0, 0), (pad, pad), (0, 0)), mode='constant', constant_values=128)
 
-## Citation
-
-Pham, Luan, The Huynh Vu, and Tuan Anh Tran. "Facial expression recognition using residual masking network." 2020 25Th international conference on pattern recognition (ICPR). IEEE, 2021.
-```
-@inproceedings{pham2021facial,
-  title={Facial expression recognition using residual masking network},
-  author={Pham, Luan and Vu, The Huynh and Tran, Tuan Anh},
-  booktitle={2020 25Th international conference on pattern recognition (ICPR)},
-  pages={4513--4519},
-  year={2021},
-  organization={IEEE}
-}
 ```
