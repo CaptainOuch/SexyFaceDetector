@@ -1,6 +1,6 @@
 # Определение лица и насколько оно секси
 
-# Результат:
+#№ Результат:
 Есть 2 категории
 
 Sexy:
@@ -13,8 +13,8 @@ Ugly:
 <img width=500 src= "https://user-images.githubusercontent.com/38643187/244309258-c7aac061-dfcb-4e0e-ad87-da8de4f6f491.png"/>
 </p>
 
-# Данные
-## Sexyness classifier
+#№ Данные
+#№# Classifier
 
 Данные для классификации сексуальности были загружены с помощью плагина для браузера 
 - [Download All Images](https://chrome.google.com/webstore/detail/download-all-images/ifipmflagepipjokmbdecpmjbibjnakm) (Загружает изображения с любой страницы)
@@ -22,7 +22,7 @@ Ugly:
 
 <p id="train_fer"></p>
 
-## Face Detection
+#№# Face Detection
 - Данные для определения координат лица были сняты с камеры с помощью функции .VideoCapture библиотеки opencv
 ```python
 cap = cv2.VideoCapture(1)
@@ -63,8 +63,8 @@ augmentor = alb.Compose([alb.RandomCrop(width=450, height=450),
                        bbox_params=alb.BboxParams(format='albumentations', 
                                                   label_fields=['class_labels']))
 ```
-# Обучение моделей
-## Sexyness classifier
+№# Обучение моделей
+#№# Classifier
 В обучении классификатора использовался несложный пайплайн сверточной нейронной сети
 
 ```python
@@ -111,7 +111,7 @@ model.summary()
 </p>
 
 
-## Face Detection
+#№# Face Detection
 В пайплайне модели использовалась предобученная сверточная нейронная сеть VGG16 без конечного слоя с нейронами
 
 ```python
@@ -160,7 +160,7 @@ facetracker.summary()
 <img width=1000 src= "https://user-images.githubusercontent.com/38643187/244348623-0be6b5a6-51e7-4b75-a562-f0fb49ed9b16.png"/>
 </p>
 
-## Имплементация в telegram
+№## Имплементация в telegram
 
 Основную сложность вызвала проблема с горизонтальными и вертикальными изображениями - т.к. нейронная сеть принимает только квадратные изображения, информация сильно искажается.
 У каждой картинки с неравными сторонами добавляются серые полосы к меньшей стороне.
